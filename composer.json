@@ -1,0 +1,22 @@
+{
+	"name": "willherzog/twig-generic",
+	"description": "General-purpose extensions to the Twig templating engine.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Will Herzog",
+            "email": "willherzog@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+		"php": "^8.2",
+		"twig/twig": "^3.0"
+	},
+    "autoload": {
+        "psr-4": {
+            "WHTwig\\": "src/"
+        }
+    }
+}
