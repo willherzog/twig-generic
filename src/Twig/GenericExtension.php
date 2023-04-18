@@ -5,6 +5,8 @@ namespace WHTwig\Twig;
 use Twig\Extension\AbstractExtension;
 use Twig\{TwigFilter,TwigFunction};
 
+use WHTwig\Twig\Util\StringUtil;
+
 /**
  * @author Will Herzog <willherzog@gmail.com>
  */
@@ -19,12 +21,8 @@ class GenericExtension extends AbstractExtension
 	public function getFilters(): array
 	{
 		return [
-			new TwigFilter('underscore_to_dash', function(string $str): string {
-				if( str_contains($str, '_') ) {
-					$str = str_replace(['__','_','++'], ['++','-','__'], $str);
-				}
-
-				return $str;
+			new TwigFilter('underscore_to_dash', function(string $str, bool $preserveDoubleUnderscores = true): string {
+				return StringUtil::convertUnderscoresToDashes($str, $preserveDoubleUnderscores);
 			}),
 
 			new TwigFilter('percentage', function(float $decimal, bool $round = true): string {
