@@ -66,8 +66,8 @@ class GenericExtension extends AbstractExtension
 				return mb_substr($name, 0, 1) . $suffix;
 			}),
 
-			new TwigFilter('enum_value', function(\BackedEnum $enum): int|string {
-				return $enum->value;
+			new TwigFilter('enum_value', function(\BackedEnum|null $enum): int|string {
+				return $enum?->value ?? '';
 			})
 		];
 	}
