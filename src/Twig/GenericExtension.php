@@ -66,6 +66,41 @@ class GenericExtension extends AbstractExtension
 				return mb_substr($name, 0, 1) . $suffix;
 			}),
 
+			new TwigFilter('limit_words', function( string $str, int $maxWords ): string {
+				if( $maxWords > 0 && $str !== '' ) {
+					$words = explode(' ', preg_replace('/ +/', ' ', $str));
+					$nonWords = ['&','/','+','-','=','<','>','–'];
+					$sentenceEndChars = ['.','!','?'];
+					$cardinalMaximum = $maxWords;
+
+					foreach( $words as $key => $word ) {
+						if( $key === $maxWords ) {
+							break;
+						} elseif( in_array($word, $nonWords, true) ) {
+							$cardinalMaximum++;
+						}
+					}
+
+					$str = implode(' ', array_slice($words, 0, $cardinalMaximum));
+					$lastChar = mb_strcut($str, -1, 1);
+
+					if( $cardinalMaximum < count($words) && !in_array($lastChar, $sentenceEndChars, true) ) {
+						if( $pos = mb_strrpos($str, ' (') ) {
+							$str = mb_strcut($str, 0, $pos);
+							$lastChar = mb_strcut($str, -1, 1);
+						}
+
+						if( in_array($lastChar, ['.',',',':',';','!','?','-'], true) ) {
+							$str = mb_strcut($str, 0, mb_strlen($str) - 1);
+						}
+
+						$str .= '…';
+					}
+				}
+
+				return $str;
+			}),
+
 			new TwigFilter('enum_value', function(\BackedEnum|null $enum): int|string {
 				return $enum?->value ?? '';
 			})
