@@ -5,7 +5,7 @@ namespace WHTwig\Twig;
 use Twig\Extension\AbstractExtension;
 use Twig\{TwigFilter,TwigFunction};
 
-use WHTwig\Twig\Util\StringUtil;
+use WHPHP\Util\StringUtil;
 
 /**
  * @author Will Herzog <willherzog@gmail.com>
