@@ -30,7 +30,7 @@ class GenericExtension extends AbstractExtension
 				$indent = str_repeat($prototype, $level);
 
 				return rtrim(str_replace(["\r\n","\n"], ["\n","\n$indent"], $str), "\t");
-			}),
+			}, ['is_safe' => ['all']]),
 
 			new TwigFilter('percentage', function(float $decimal, bool $round = true): string {
 				$percent = $round ? round($decimal * 100) : $decimal * 100;
