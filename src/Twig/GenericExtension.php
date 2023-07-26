@@ -25,9 +25,13 @@ class GenericExtension extends AbstractExtension
 				return StringUtil::convertUnderscoresToDashes($str, $preserveDoubleUnderscores);
 			}),
 
-			new TwigFilter('indent_lines', function(string $str, int $level = 1, int $numSpaces = 0): string {
+			new TwigFilter('indent_lines', function(string $str, int $level = 1, bool $applyIndentAtStart = true, int $numSpaces = 0): string {
 				$prototype = $numSpaces > 0 ? str_repeat(' ', $numSpaces) : "\t";
 				$indent = str_repeat($prototype, $level);
+
+				if( $applyIndentAtStart ) {
+					$str = $indent . $str;
+				}
 
 				return rtrim(str_replace(["\r\n","\n"], ["\n","\n$indent"], $str), "\t");
 			}, ['is_safe' => ['all']]),
