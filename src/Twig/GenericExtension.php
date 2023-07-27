@@ -12,8 +12,10 @@ use WHPHP\Util\StringUtil;
  */
 class GenericExtension extends AbstractExtension
 {
-	public function __construct(protected readonly string $appDir)
-	{}
+	public function __construct(
+		protected readonly string $appDir,
+		protected readonly int $indentSpaces = 0
+	) {}
 
 	/**
 	 * @inheritDoc
@@ -25,8 +27,8 @@ class GenericExtension extends AbstractExtension
 				return StringUtil::convertUnderscoresToDashes($str, $preserveDoubleUnderscores);
 			}),
 
-			new TwigFilter('indent_lines', function(string $str, int $level = 1, bool $applyIndentAtStart = true, int $numSpaces = 0): string {
-				$prototype = $numSpaces > 0 ? str_repeat(' ', $numSpaces) : "\t";
+			new TwigFilter('indent_lines', function(string $str, int $level = 1, bool $applyIndentAtStart = true): string {
+				$prototype = $this->indentSpaces > 0 ? str_repeat(' ', $this->indentSpaces) : "\t";
 				$indent = str_repeat($prototype, $level);
 
 				if( $applyIndentAtStart ) {
