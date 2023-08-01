@@ -29,7 +29,7 @@ class GenericExtension extends AbstractExtension
 
 			new TwigFilter('indent_lines', function(string $str, int $level = 1, bool $applyIndentAtStart = true): string {
 				$prototype = $this->indentSpaces > 0 ? str_repeat(' ', $this->indentSpaces) : "\t";
-				$indent = str_repeat($prototype, $level);
+				$indent = str_repeat($prototype, max($level, 0));
 
 				if( $applyIndentAtStart ) {
 					$str = $indent . $str;
