@@ -134,11 +134,11 @@ class GenericExtension extends AbstractExtension
 			{
 				$fullPath = $this->appDir;
 
-				if( !str_starts_with($filePath, '/') ) {
+				if( !str_ends_with($fullPath, '/') ) {
 					$fullPath .= '/';
 				}
 
-				$fullPath .= $filePath;
+				$fullPath .= ltrim($filePath, '/\\');
 
 				return is_file($fullPath) && is_readable($fullPath);
 			})
