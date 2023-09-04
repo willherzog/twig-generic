@@ -36,7 +36,11 @@ class GenericExtension extends AbstractExtension
 				}
 
 				return rtrim(str_replace(["\r\n","\n"], ["\n","\n$indent"], $str), "\t");
-			}, ['is_safe' => ['all']]),
+			}, ['is_safe' => ['html']]),
+
+			new TwigFilter('trim_trailing_newlines', function(string $str, string $newlineChars = "\n\r"): string {
+				return rtrim($str, $newlineChars);
+			}, ['is_safe' => ['html']]),
 
 			new TwigFilter('percentage', function(float $decimal, bool $round = true): string {
 				$percent = $round ? round($decimal * 100) : $decimal * 100;
@@ -79,7 +83,7 @@ class GenericExtension extends AbstractExtension
 				return mb_substr($name, 0, 1) . $suffix;
 			}),
 
-			new TwigFilter('limit_words', function( string $str, int $maxWords ): string {
+			new TwigFilter('limit_words', function(string $str, int $maxWords): string {
 				if( $maxWords > 0 && $str !== '' ) {
 					$words = explode(' ', preg_replace('/ +/', ' ', $str));
 					$nonWords = ['&','/','+','-','=','<','>','–'];
