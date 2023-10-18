@@ -130,6 +130,18 @@ class GenericExtension extends AbstractExtension
 	public function getFunctions(): array
 	{
 		return [
+			new TwigFunction('php_info', function(): string {
+				ob_start();
+
+				phpinfo();
+
+				$phpInfo = ob_get_contents();
+
+				ob_end_clean();
+
+				return $phpInfo;
+			}),
+
 			new TwigFunction('timezone', function(): string {
 				return date_default_timezone_get();
 			}),

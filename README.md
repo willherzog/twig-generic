@@ -15,3 +15,4 @@
 ## Functions
  * `file_exists`: Check whether the given file path resolves to an existing, readable file.
  * `timezone`: Returns the current default PHP timezone (as set with `date_default_timezone_set()` or the PHP config option `date.timezone`).
+ * `php_info`: Returns the output of the `phpinfo()` function as a string (it probably goes without saying that this should only be used in a secure context).
