@@ -140,7 +140,7 @@ class GenericExtension extends AbstractExtension
 				ob_end_clean();
 
 				return $phpInfo;
-			}),
+			}, ['is_safe' => ['html']]),
 
 			new TwigFunction('timezone', function(): string {
 				return date_default_timezone_get();
