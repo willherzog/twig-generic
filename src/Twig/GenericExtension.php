@@ -42,8 +42,18 @@ class GenericExtension extends AbstractExtension
 				return rtrim($str, $newlineChars);
 			}, ['is_safe' => ['html']]),
 
-			new TwigFilter('percentage', function(float $decimal, bool $round = true): string {
-				$percent = $round ? round($decimal * 100) : $decimal * 100;
+			new TwigFilter('percentage', function(float $decimal, bool $round = true, bool $alwaysDisplaySign = false): string {
+				$percent = (string) ($round ? round($decimal * 100) : $decimal * 100);
+
+				if( $alwaysDisplaySign ) {
+					if( $decimal < 0 ) {
+						if( $percent[0] !== '-' ) {
+							$percent = '-' . $percent;
+						}
+					} elseif( $percent[0] !== '+' ) {
+						$percent = '+' . $percent;
+					}
+				}
 
 				return "$percent%";
 			}),
