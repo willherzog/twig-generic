@@ -5,7 +5,8 @@
  And if you prefer using spaces instead of tabs for the `indent_lines` filter, for the second constructor argument you'll need to set the amount of spaces to use for each level of indentation (positive integer = that number of spaces is used instead of a tab character).
 ## Filters
  * `indent_lines`: Apply the given levels of indent to each line of the input string; output is not automatically escaped.
- * `trim_trailing_newlines`: A more specific version of Twig's native `trim` filter, this only affects newline characters by default, only applies to the right side of the string, and its output is not automatically escaped since it is primarily intended to be used with HTML strings.
+ * `trim_leading_newlines`: A more specific version of Twig's native `trim` filter, this only affects newline characters by default, only applies to the left side of the string, and its output is not automatically escaped since it is primarily intended to be used with HTML strings.
+ * `trim_trailing_newlines`: Same as `trim_leading_newlines` except applying to the right side of the string.
  * `enum_value`: Outputs the value (i.e. a string or integer) of a backed enumerator; outputs empty string if the input variable is NULL.
  * `limit_words`: Truncates the input string if it has more than the given number of words (as delimited by spaces) and, if so, appends an ellipsis.
  * `underscore_to_dash`: Converts underscore characters to dash characters except that, by default, multiple adjacent underscores are preserved.

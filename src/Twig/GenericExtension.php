@@ -38,6 +38,10 @@ class GenericExtension extends AbstractExtension
 				return rtrim(str_replace(["\r\n","\n"], ["\n","\n$indent"], $str), "\t");
 			}, ['is_safe' => ['html']]),
 
+			new TwigFilter('trim_leading_newlines', function(string $str, string $newlineChars = "\n\r"): string {
+				return ltrim($str, $newlineChars);
+			}, ['is_safe' => ['html']]),
+
 			new TwigFilter('trim_trailing_newlines', function(string $str, string $newlineChars = "\n\r"): string {
 				return rtrim($str, $newlineChars);
 			}, ['is_safe' => ['html']]),
