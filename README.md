@@ -1,4 +1,4 @@
-# twig-generic
+# Twig Generic
  These are some general-purpose extensions to the Twig templating engine.
 
  Note that the extension class must be initialized with the path within which the `file_exists` function will check for file existence.
