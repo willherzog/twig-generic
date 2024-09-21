@@ -62,14 +62,24 @@ class GenericExtension extends AbstractExtension
 				return "$percent%";
 			}),
 
-			new TwigFilter('title_conditional', function(string $str): string {
-				$lcStr = mb_strtolower($str);
+			new TwigFilter('title_conditional', function(string $str, bool $perWord = false): string {
+				$convertCaseConditionally = function (string $str): string {
+					$lcStr = mb_strtolower($str);
 
-				if( $lcStr === $str ) { // input string is all lower case
-					return mb_convert_case($str, \MB_CASE_TITLE);
+					if( $lcStr === $str ) { // input string is all lower case
+						return mb_convert_case($str, \MB_CASE_TITLE);
+					}
+
+					return $str;
+				};
+
+				if( $perWord ) {
+					$strWords = array_map($convertCaseConditionally, explode(' ', $str));
+
+					return implode(' ', $strWords);
 				}
 
-				return $str;
+				return $convertCaseConditionally($str);
 			}),
 
 			new TwigFilter('initials', function(string $name, string $separator = '', string $suffix = '', bool $all = false): string {
