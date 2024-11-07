@@ -7,7 +7,7 @@
  * `indent_lines`: Apply the given levels of indent to each line of the input string; output is not automatically escaped.
  * `trim_leading_newlines`: A more specific version of Twig's native `trim` filter, this only affects newline characters by default, only applies to the left side of the string, and its output is not automatically escaped since it is primarily intended to be used with HTML strings.
  * `trim_trailing_newlines`: Same as `trim_leading_newlines` except applying to the right side of the string.
- * `enum_value`: Outputs the value (i.e. a string or integer) of a backed enumerator; outputs empty string if the input variable is NULL.
+ * `enum_value`: Outputs the `value` attribute (i.e. a string or integer) of a backed enumeration; outputs an empty string instead if the filtered variable is NULL (this makes it safer to use than referencing the variable's `value` attribute directly).
  * `limit_words`: Truncates the input string if it has more than the given number of words (as delimited by spaces) and, if so, appends an ellipsis.
  * `underscore_to_dash`: Converts underscore characters to dash characters except that, by default, multiple adjacent underscores are preserved.
  * `title_conditional`: A more conservative version of Twig's native `title` filter, this only applies case folding to the input string when all of its letters are lower case.
